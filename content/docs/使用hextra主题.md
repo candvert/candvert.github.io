@@ -5,6 +5,7 @@ date: 2025-10-15
 tags:
   - hugo
   - hugo主题
+weight: "10"
 ---
 
 - [推荐配置](#推荐配置)
@@ -160,7 +161,7 @@ title: "博客"
 ---
 title: "GO"
 description: "what"
-lastmod: '2024-10-12'
+date: '2024-10-12'
 tags: ["Go"]
 ---
 
@@ -205,6 +206,9 @@ sidebar:
 
 // 不显示目录
 toc: false
+
+// 创建时间
+date: '2024-10-08'
 
 // 最后修改时间
 lastmod: '2024-10-12'
@@ -266,24 +270,6 @@ params:
       enable: true
       # hover | always
       display: hover
-
-  comments:
-    enable: false
-    type: giscus
-    # https://giscus.app/
-    giscus:
-      repo: imfing/hextra
-      repoId: R_kgDOJ9fJag
-      category: General
-      categoryId: DIC_kwDOJ9fJas4CY7gW
-      # mapping: pathname
-      # strict: 0
-      # reactionsEnabled: 1
-      # emitMetadata: 0
-      # inputPosition: top
-      # lang: en
-      # theme: noborder_dark
-
 
 markup:
   highlight:
@@ -404,8 +390,8 @@ params:
     displayToggle: false
 ```
 ## 页脚的版权信息
+创建 `i18n/zh-cn.yaml` 文件
 ```yaml
-# 创建 i18n/zh-cn.yaml 文件
 copyright: "© 2025 All Rights Reserved"
 poweredBy: "由 Candvert 制作"
 ```
@@ -529,6 +515,9 @@ languages:
   font-family: "Times New Roman", Times, serif;
 }
 ```
+## 自定义页脚额外部分
+创建 `layouts/_partials/custom/footer.html` 文件来添加页脚的额外部分
+添加的部分将出现在页脚的版权部分之前
 ## md文件中的代码块
 ```go
 // 通过设置 filename 属性可为代码块添加文件名或标题：

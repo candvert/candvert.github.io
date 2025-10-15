@@ -1,7 +1,7 @@
 ---
 title: yaml格式
 description: yaml格式
-lastmod: 2025-10-15
+date: 2025-10-15
 tags:
   - yaml
 ---
