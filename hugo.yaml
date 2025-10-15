@@ -19,7 +19,7 @@ params:
 
   editURL:
     enable: true
-    base: "https://github.com/candvert/candvert.github.io"
+    base: "https://github.com/candvert/candvert.github.io/blob/main/content/"
 
   displayUpdatedDate: true
   dateFormat: "2006年1月2日"
