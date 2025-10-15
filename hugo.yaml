@@ -1,4 +1,4 @@
-baseURL: https://example.org/
+baseURL: https://candvert.github.io/
 title: Candvert
 theme: 'hextra'
 
@@ -38,6 +38,16 @@ params:
     displayCopyright: true
     displayPoweredBy: true
     width: normal
+
+  comments:
+    enable: true
+    type: giscus
+
+    giscus:
+      repo: candvert/candvert.github.io
+      repoId: R_kgDOQCpOFQ
+      category: Announcements
+      categoryId: DIC_kwDOQCpOFc4CwrBt
 
 menu:
   main:
