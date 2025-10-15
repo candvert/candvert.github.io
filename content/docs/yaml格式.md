@@ -1,6 +1,6 @@
 ---
-title: yaml格式
-description: yaml格式
+title: yaml 格式
+description: yaml 格式
 date: 2025-10-15
 tags:
   - yaml
