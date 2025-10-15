@@ -13,6 +13,7 @@ weight: "10"
 
 - [front matter](#front%20matter)
 - [hugo.yaml](#hugo.yaml)
+- [about页面](#about页面)
 - [设置网站为中文网站](#设置网站为中文网站)
 - [右上角菜单](#右上角菜单)
 - [嵌套菜单](#嵌套菜单)
@@ -284,6 +285,16 @@ markup:
           block: [['\[', '\]'], ['$$', '$$']]
           inline: [['\(', '\)']]
         enable: true
+```
+## about页面
+创建 `content/about/index.md` 文件
+```yaml
+---
+title: 关于
+toc: false
+---
+
+这是由 ![Candvert](https://github.com/candvert/) 创建的网站，使用 ![Hugo](https://gohugo.io/) 的主题 ![hextra](https://github.com/imfing/hextra/) 创建。
 ```
 ## 设置网站为中文网站
 ```yaml
