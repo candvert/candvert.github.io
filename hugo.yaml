@@ -48,6 +48,7 @@ params:
       repoId: R_kgDOQCpOFQ
       category: Announcements
       categoryId: DIC_kwDOQCpOFc4CwrBt
+      lang: zh-CN
 
 menu:
   main:
