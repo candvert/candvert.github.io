@@ -1,3 +1,87 @@
 baseURL: https://example.org/
-languageCode: en-us
-title: My New Hugo Site
+title: Candvert
+theme: 'hextra'
+
+defaultContentLanguage: zh-cn
+languageCode: zh-cn
+
+hasCJKLanguage: true
+
+params:
+  navbar:
+    displayTitle: true
+    displayLogo: true
+    logo:
+      path: 
+      link: /
+      width: 20
+      height: 20
+
+  editURL:
+    enable: true
+    base: "https://github.com/candvert/candvert.github.io"
+
+  displayUpdatedDate: true
+  dateFormat: "2006年1月2日"
+  
+  blog:
+    list:
+      displayTags: true
+  toc:
+    displayTags: true
+
+  navbar:
+    width: full
+
+  footer:
+    enable: true
+    displayCopyright: true
+    displayPoweredBy: true
+    width: normal
+
+menu:
+  main:
+    - name: 文档
+      pageRef: /docs
+      weight: 1
+    - name: 博客
+      pageRef: /blog
+      weight: 2
+    - identifier: who
+      name: 关于
+      pageRef: /about
+      weight: 3
+    - name: 搜索
+      weight: 4
+      params:
+        type: search
+    - name: GitHub
+      weight: 5
+      url: "https://github.com/imfing/hextra"
+      params:
+        icon: github
+
+  sidebar:
+    - name: 更多
+      params:
+        type: separator
+      weight: 1
+    - name: "关于"
+      pageRef: "/about"
+      weight: 2
+    - name: "Hugo 文档 ↗"
+      url: "https://gohugo.io/documentation/"
+      weight: 3
+
+markup:
+  highlight:
+    noClasses: false
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      passthrough:
+        delimiters:
+          block: [['\[', '\]'], ['$$', '$$']]
+          inline: [['\(', '\)']]
+        enable: true
