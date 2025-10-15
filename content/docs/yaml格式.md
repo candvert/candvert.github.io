@@ -4,6 +4,7 @@ description: yaml格式
 lastmod: 2025-10-15
 tags:
   - yaml
+comment: "true"
 ---
 ## 基本概念
 - 大小写敏感
