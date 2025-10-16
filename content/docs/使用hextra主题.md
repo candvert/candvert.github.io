@@ -35,11 +35,15 @@ weight: "10"
 - [md文件中的代码块](#md文件中的代码块)
 
 `./hugo new site <site_name> --format yaml`
+<br/>
 `cd <site_name>`
+<br/>
 `git init`
+<br/>
 `git submodule add https://github.com/imfing/hextra themes/hextra`
 
 官方示例网站：[https://imfing.github.io/hextra/zh-cn/](https://imfing.github.io/hextra/zh-cn/)
+<br/>
 在 github pages 上部署：[https://imfing.github.io/hextra/zh-cn/docs/guide/deploy-site/](https://imfing.github.io/hextra/zh-cn/docs/guide/deploy-site/)
 ## 推荐配置
 ```go
