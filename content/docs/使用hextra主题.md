@@ -30,6 +30,7 @@ weight: "10"
 - [评论功能](#评论功能)
 - [多语言](#多语言)
 - [自定义css](#自定义css)
+- [自定义脚本](#自定义脚本)
 - [自定义页脚额外部分](#自定义页脚额外部分)
 - [md文件中的代码块](#md文件中的代码块)
 
@@ -531,6 +532,19 @@ languages:
 .content {
   font-family: "Times New Roman", Times, serif;
 }
+```
+## 自定义脚本
+创建 `layouts/_partials/custom/head-end.html` 文件在每个页面添加自定义脚本
+```html
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	var startDate = new Date("2025-10-15 00:00:00");
+	var currentDate = new Date();
+	var timeDifference = currentDate - startDate;
+	var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+	document.getElementById("runtime").innerHTML = "本站已稳定运行: " + days + "天 ";
+});
+</script>
 ```
 ## 自定义页脚额外部分
 创建 `layouts/_partials/custom/footer.html` 文件来添加页脚的额外部分

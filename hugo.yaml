@@ -84,6 +84,10 @@ menu:
       url: "https://gohugo.io/documentation/"
       weight: 3
 
+services:
+  googleAnalytics:
+    ID: G-QC1S4H07E9
+
 markup:
   highlight:
     noClasses: false
