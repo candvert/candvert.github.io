@@ -147,10 +147,11 @@ layout: hextra-home
 
 // content/docs/_index.md
 ---
-linkTitle: "文档"
+linkTitle: 文档
 title: 简介
+comments: false
 ---
-👋 你好！欢迎来到 Hextra 文档中心！
+👋 你好！欢迎来到 Candvert 的文档中心！
 
 
 // content/blog/_index.md
@@ -220,6 +221,9 @@ tags: ['hello']
 
 // 摘要
 description: "learn Go"
+
+// 不显示评论
+comments: false
 
 // 作者
 authors:
@@ -292,6 +296,7 @@ markup:
 ---
 title: 关于
 toc: false
+comments: false
 ---
 
 这是由 [Candvert](https://github.com/candvert/) 创建的网站，使用 [Hugo](https://gohugo.io/) 的主题 [hextra](https://github.com/imfing/hextra/) 创建。
