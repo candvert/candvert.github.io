@@ -4,15 +4,24 @@ description: Github 个人主页美化
 date: 2025-10-15
 tags:
   - github
+lastmod: 2025-10-16
 ---
 ## 原理
 在 GitHub 上，如果你创建一个与你的用户名​**​同名的公共仓库​**​（例如，你的用户名是 `Ilya`，那么仓库名就应该是 `Ilya`），那么这个仓库里的 `README.md`文件的内容就会自动显示在你的 GitHub 个人主页的顶部
 ## 我的配置
 ```md
+<h1 align="center">👋</h1>
+
+<p align="center">
+  <samp>
+    <a href="https://candvert.top">homepage</a>
+  </samp>
+</p>
+
 <a href="https://github.com/anuraghazra/github-readme-stats">
-  <img height=200 align="center" src="https://github-readme-stats.vercel.app/api?username=candvert&show_icons=true&theme=tokyonight" />
+  <img height=200 align="center" src="https://github-readme-stats.vercel.app/api?username=candvert&show_icons=true" />
 </a>
-<img height=200 align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=candvert&layout=compact&langs_count=8&card_width=320&theme=tokyonight" />
+<img height=200 align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=candvert&layout=compact&langs_count=8&card_width=320" />
 
 <a href="https://github.com/candvert/candvert.github.io">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=candvert&repo=candvert.github.io" />
