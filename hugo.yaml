@@ -11,6 +11,7 @@ params:
   navbar:
     displayTitle: true
     displayLogo: false
+    width: full
     logo:
       path: 
       link: /
@@ -29,9 +30,6 @@ params:
       displayTags: true
   toc:
     displayTags: true
-
-  navbar:
-    width: full
 
   footer:
     enable: true
