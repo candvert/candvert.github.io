@@ -10,7 +10,7 @@ hasCJKLanguage: true
 params:
   navbar:
     displayTitle: true
-    displayLogo: true
+    displayLogo: false
     logo:
       path: 
       link: /
