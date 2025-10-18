@@ -5,7 +5,7 @@ date: 2025-10-15
 tags:
   - hugo
   - hugo主题
-weight: "10"
+weight: "9"
 ---
 
 - [推荐配置](#推荐配置)

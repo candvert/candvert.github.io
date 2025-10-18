@@ -1,15 +1,15 @@
 ---
 title: 在手机上使用termux来实现git操作
 description: 在手机上使用termux来实现git操作
-date: 2024-10-17
-lastmod: 2024-10-17
+date: 2025-10-17
+lastmod: 2025-10-17
 tags:
   - termux
   - git
 ---
-考虑到有时可能接触不到电脑，但是又想在手机上编辑自己的博客并提交到github
+考虑到有时可能接触不到电脑，但是又想在手机上编辑自己的博客并提交到 github
 <br/>
-此时就可以使用termux
+此时就可以使用 termux
 <br/>
 ## 安装
 在 [termux](https://github.com/termux/termux-app/releases) 进行下载安装
@@ -25,7 +25,7 @@ termux-setup-storage
 pkg update
 pkg install git
 ```
-安装后运行 `git config --global --list` 会报错，因为 git 会默认调用分页程序，需要禁用 git 分页器​
+完成后运行 `git config --global --list` 会报错，因为 git 会默认调用分页程序，需要禁用 git 分页器​
 ```sh
 git config --global core.pager ""
 ```
@@ -37,9 +37,9 @@ git config --global --list
 ```
 ## 生成密钥文件
 ```sh
-ssh-keygen -t rsa -b 4096 -C "leiyue159@gmail.com"
+ssh-keygen -t rsa -b 4096 -C "your-email@gmail.com"
 cd
-cat ../home/.ssh/id_rsa.pub 
+cat ../home/.ssh/id_rsa.pub
 ```
 ## 设置命令别名
 ```sh
