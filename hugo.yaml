@@ -75,12 +75,9 @@ menu:
       params:
         type: separator
       weight: 1
-    - name: "关于"
-      pageRef: "/about"
-      weight: 2
     - name: "Hugo 文档 ↗"
       url: "https://gohugo.io/documentation/"
-      weight: 3
+      weight: 2
 
 services:
   googleAnalytics:
