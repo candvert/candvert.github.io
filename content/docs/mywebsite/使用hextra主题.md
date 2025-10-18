@@ -45,8 +45,8 @@ tags:
 <br/>
 在 github pages 上部署：[https://imfing.github.io/hextra/zh-cn/docs/guide/deploy-site/](https://imfing.github.io/hextra/zh-cn/docs/guide/deploy-site/)
 ## 推荐配置
-```go
-// hugo.yaml
+#### hugo.yaml 文件：
+```yaml
 baseURL: https://candvert.github.io/
 title: Candvert
 theme: 'hextra'
@@ -134,9 +134,9 @@ markup:
           block: [['\[', '\]'], ['$$', '$$']]
           inline: [['\(', '\)']]
         enable: true
-
-
-// content/_index.md
+```
+#### `content/_index.md` 文件：
+```go
 ---
 title: Hextra 主题
 layout: hextra-home
@@ -147,43 +147,46 @@ layout: hextra-home
     subtitle="使用 Hextra 无需依赖 Node.js。由 Hugo 提供支持，Hugo 是最快的静态网站生成器之一，只需一个二进制文件即可在数秒内创建网站。"
   >}}
 {{< /hextra/feature-grid >}}
-
-
-// content/docs/_index.md
+```
+#### `content/docs/_index.md` 文件：
+```go
 ---
 linkTitle: 文档
 title: 简介
 comments: false
 ---
 👋 你好！欢迎来到 Candvert 的文档中心！
-
-
-// content/blog/_index.md
+```
+#### `content/blog/_index.md` 文件：
+```go
 ---
 title: "博客"
 ---
-
-
-// 普通 md 文件
+```
+#### 普通 md 文件：
+```go
 ---
 title: "GO"
 description: "what"
-date: '2024-10-12'
+date: '2024-10-08'
+lastmod: '2024-10-12'
 tags: ["Go"]
 ---
-
-
-// i18n/zh-cn.yaml
+```
+#### `i18n/zh-cn.yaml` 文件
+```yaml
 copyright: "© 2025 All Rights Reserved"
 poweredBy: "由 Candvert 制作"
 ```
 ## 目录结构
+Hextra 为不同类型的内容提供了三种布局：
+<br/>
+content/docs/	    适合结构化文档
+<br/>
+content/blog/	    用于博客文章，包含列表和详细文章视图
+<br/>
+其他所有目录	    单页文章视图，无侧边栏
 ```go
-// Hextra 为不同类型的内容提供了三种布局：
-// content/docs/	适合结构化文档
-// content/blog/	用于博客文章，包含列表和详细文章视图
-// 其他所有目录	    单页文章视图，无侧边栏
-
 content
 ├── _index.md                         // <- /
 ├── docs
@@ -295,8 +298,8 @@ markup:
         enable: true
 ```
 ## about页面
-创建 `content/about/index.md` 文件
-```yaml
+创建 `content/about/index.md` 文件：
+```go
 ---
 title: 关于
 toc: false
@@ -411,19 +414,18 @@ params:
     displayToggle: false
 ```
 ## 页脚的版权信息
-创建 `i18n/zh-cn.yaml` 文件
+创建 `i18n/zh-cn.yaml` 文件：
 ```yaml
 copyright: "© 2025 All Rights Reserved"
 poweredBy: "由 Candvert 制作"
 ```
 ## 网站图标
-```go
-// 要自定义网站的 favicon，将图标文件放在 static 文件夹下以覆盖主题默认的网站图标
-// 如果想增强暗色模式支持，在 static 文件夹中添加 favicon-dark.svg
-```
+要自定义网站的 favicon，将图标文件放在 static 文件夹下以覆盖主题默认的网站图标
+<br/>
+如果想增强暗色模式支持，在 static 文件夹中添加 favicon-dark.svg
 ## 每篇文章编辑链接
+编辑链接将基于提供的 URL 作为根目录自动为每个页面生成
 ```yaml
-# 编辑链接将基于提供的 URL 作为根目录自动为每个页面生成
 params:
   editURL:
     enable: true
@@ -467,10 +469,8 @@ params:
     width: wide
 ```
 ## 搜索功能
+默认会启用由 FlexSearch 提供的全文搜索
 ```yaml
-# 默认启用由 FlexSearch 提供的全文搜索
-
-
 # 要自定义搜索索引，设置 params.search.flexsearch.index 参数
 params:
   # 搜索
@@ -528,9 +528,8 @@ languages:
         message: New version released!
 ```
 ## 自定义css
+创建 assets/css/custom.css 文件：
 ```go
-// 创建 assets/css/custom.css 文件
-
 // 自定义字体族
 .content {
   font-family: "Times New Roman", Times, serif;
@@ -551,34 +550,56 @@ document.addEventListener('DOMContentLoaded', function() {
 ```
 ## 自定义页脚额外部分
 创建 `layouts/_partials/custom/footer.html` 文件来添加页脚的额外部分
+<br/>
 添加的部分将出现在页脚的版权部分之前
 ## md文件中的代码块
+通过设置 filename 属性可为代码块添加文件名或标题
 ```go
-// 通过设置 filename 属性可为代码块添加文件名或标题：
 // ```python {filename="hello.py"}
 // def say_hello():
 //     print("Hello!")
 // ```
+```
 
-
-// 通过 base_url 属性可设置基础 URL，该 URL 会与 filename 组合生成可点击的链接
+```python {filename="hello.py"}
+ def say_hello():
+     print("Hello!")
+```
+通过 base_url 属性可设置基础 URL，该 URL 会与 filename 组合生成可点击的链接
+```go
 // ```go {base_url="https://github.com/",filename="candvert"}
 // go 1.20
 // ```
+```
 
-
-// 设置 linenos=table 可启用行号，并通过 linenostart 指定起始行号：
+```go {base_url="https://github.com/",filename="candvert"}
+go 1.20
+```
+设置 linenos=table 可启用行号，并通过 linenostart 指定起始行号
+```go
 // ```python {linenos=table,linenostart=42}
 // def say_hello():
 //     print("Hello!")
 // ```
+```
 
-
-// 通过 hl_lines 属性可高亮指定行号（支持数组格式）：
+```python {linenos=table,linenostart=42}
+def say_hello():
+    print("Hello!")
+```
+通过 hl_lines 属性可高亮指定行号（支持数组格式）
+```go
 // ```python {linenos=table,hl_lines=[2,4],linenostart=1,filename="hello.py"}
 // def say_hello():
 //     print("Hello!")
 // def main():
 //     say_hello()
 // ```
+```
+
+```python {linenos=table,hl_lines=[2,4],linenostart=1,filename="hello.py"}
+def say_hello():
+    print("Hello!")
+def main():
+    say_hello()
 ```

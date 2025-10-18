@@ -55,7 +55,7 @@ my_project 文件夹中最重要的是 content 目录和 layouts 目录。conten
 </body>
 </html>
 ```
-然后在命令行输入 `./hugo server`，便可访问网页 http://localhost:1313/
+然后在命令行输入 `./hugo server`，便可访问主页 http://localhost:1313/
 ## 全局布局
 全局布局通过 layouts/baseof.html 实现，baseof.html 被称为基本模板
 <br/>
@@ -157,7 +157,7 @@ categories = ['vegetarian', 'gluten-free']
 title = 'Example'
 +++
 ```
-然后在 taxonomy.html 文件中创建分类的链接：
+然后在 taxonomy.html 文件中：
 ```go
 {{ define "main" }}
   {{ range .Pages }}
@@ -188,7 +188,7 @@ content/
         │   └── benefit.md
         └── _index.md
 ```
-articles/article 目录不是 section
+articles/article 目录不是 section，因为它既不是 content 目录的第一级目录也不包含 `_index.md` 文件
 <br/>
 当访问 content/articiles 时会优先使用 layouts/articles/section.html 进行渲染，这就是 section.html 的作用
 <br/>
@@ -211,7 +211,7 @@ content/
   {{ .Content }}
 {{ end }}
 ```
-而在 `layouts/home.html` 中可以访问 `content/_index.md` 中的内容
+而在 `layouts/home.html` 中则可以访问 `content/_index.md` 中的内容
 ## 内层的page.html
 `content/books/flower.md` 优先使用 `layouts/books/page.html` 渲染，然后才是 `layouts/page.html`
 ## `_partials`
@@ -332,10 +332,6 @@ https://github.com/alex-shpak/hugo-book
 https://github.com/CaiJimmy/hugo-theme-stack
 https://github.com/imfing/hextra
 ```
-[[使用hugo-PaperMod主题]]
-[[使用hugo-book主题]]
-[[使用hugo-theme-stack主题]]
-[[使用hextra主题]]
 ## 设置网站为中文网站
 在 hugo.toml 中设置
 ```toml
