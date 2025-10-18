@@ -8,8 +8,7 @@ lastmod: 2025-10-18
 weight: "10"
 ---
 
-- [基本步骤](#基本步骤)
-- [layouts目录](#layouts目录)
+- [创建项目](#创建项目)
 - [全局布局](#全局布局)
 - [创建md文档](#创建md文档)
 - [taxonomy.html](#taxonomy.html)
@@ -36,9 +35,14 @@ weight: "10"
 Hugo 中并一个没有像 Nextjs 的 global.css 的文件（global.css 用于定义应用于整个应用程序的全局 CSS 样式规则）
 <br/>
 Hugo 的 css 是使用管道函数处理的，或者直接在模板中使用 `<link></link>` 引入 css 文件
-## 基本步骤
-在命令行输入 `./hugo new site my_project`
-创建 layouts/home.html 文件
+## 创建项目
+在命令行输入 `./hugo new site my_project` 便在当前目录创建了 my_project 文件夹
+<br/>
+my_project 文件夹中最重要的是 content 目录和 layouts 目录。content 目录用于放入 md 文档，layouts 目录用于编写模板文件
+<br/>
+模板文件以 html 作为后缀名，位于 layouts 目录下。比如 layouts/home.html 用来渲染主页，layouts/404.html 用来渲染 404 页面
+<br/>
+创建 layouts/home.html 文件：
 ```html
 <!DOCTYPE html>
 <html lang="zh">
@@ -51,19 +55,14 @@ Hugo 的 css 是使用管道函数处理的，或者直接在模板中使用 `<l
 </body>
 </html>
 ```
-在命令行输入 `./hugo server`
-访问 http://localhost:1313/
-## layouts目录
-```go
-layouts 目录下的文件被称为模板
-layouts/home.html 渲染主页
-layouts/404.html 渲染 404 页面
-```
+然后在命令行输入 `./hugo server`，便可访问网页 http://localhost:1313/
 ## 全局布局
+全局布局通过 layouts/baseof.html 实现，baseof.html 被称为基本模板
+<br/>
+基本模板中的 `{{ block "main" . }}{{ end }}` 部分会被其他模板中的 `{{ define "main" }} {{ end }}` 部分替换
+<br/>
+假设有该 baseof.html：
 ```go
-// 全局布局通过 layouts/baseof.html 实现，baseof.html 被称为基本模板
-// 基本模板中的 {{ block "main" . }}{{ end }} 部分会被其他模板中的 {{ define "main" }} {{ end }} 部分替换
-// 假设有该 baseof.html
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -81,87 +80,102 @@ layouts/404.html 渲染 404 页面
   </footer>
 </body>
 </html>
-
-// 假设有该 home.html
+```
+假设有该 home.html：
+```go
 {{ define "main" }}
   <h1>What home</h1>
 {{ end }}
-// 则访问主页时，渲染出的是 baseof.html 中的 {{ block "main" . }}{{ end }} 替换为 <h1>Home</h1> 后的结果
-
-
-
-// 其他模板要应用基本模板必须要包含 define
-// 如果模板不包含 define，则不会应用基本模板
 ```
-## 创建md文档
+则访问主页时，渲染出的是 baseof.html 中的 `{{ block "main" . }}{{ end }}` 替换为 `<h1>Home</h1>` 后的结果，即：
 ```go
-// 在命令行输入 ./hugo new content content/posts/first.md
-// 或者手动在 content/posts 目录下创建 first.md 文件
-// 假设 first.md 有如下内容
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <title>MySite</title>
+</head>
+<body>
+  <header>
+    <h1>Header</h1>
+  </header>
+  <main>
+    <h1>Home</h1>
+  </main>
+  <footer>
+    <h1>Footer</h1>
+  </footer>
+</body>
+</html>
+```
+其他模板要应用基本模板必须要包含 define 部分
+<br/>
+如果模板不包含 define 部分，则不会应用基本模板
+## 创建md文档
+在命令行输入 `./hugo new content content/posts/first.md` 或者手动在 content/posts 目录下创建 first.md 文件：
+```go
 +++
 title = 'first'
 +++
 ## Go
 great
-
-
-// 常规内容页面会使用 layouts/page.html 渲染
-// 创建 layouts/page.html 文件，输入如下内容：
+```
+常规内容页面会使用 layouts/page.html 渲染
+<br/>
+创建 layouts/page.html 文件，输入如下内容：
+```go
+// .Title 表示 md 文档中 front matter 中的 title 字段
+// .Content 表示 md 文档的内容
 {{ define "main" }}
   {{ .Title }}
   {{ .Content }}
 {{ end }}
-// .Title 表示 md 文档中 front matter 中的 title 字段
-// .Content 表示 md 文档的内容
-
-
-
-// 然后便可访问 http://localhost:1313/posts/first
-// 也就是说如果创建 content/a.md，那么它的路由就是 http://localhost:1313/a
 ```
+然后便可访问网址 http://localhost:1313/posts/first
+<br/>
+也就是说如果创建 content/a.md，那么它的路由就是 http://localhost:1313/a
 ## taxonomy.html
+layouts/taxonomy.html 的作用是渲染分类页面
+<br/>
+首先在 hugo.toml 中定义分类方式，下面两种分类是默认存在的：
 ```go
-// taxonomy.html 的作用是渲染分类页面
-
-// 首先在 hugo.toml 中定义分类方式，下面两种分类是默认存在的
 [taxonomies]
   category = 'categories'
   tag = 'tags'
-// 然后创建 taxonomy.html 文件
+```
+然后创建 taxonomy.html 文件：
+```go
 {{ define "main" }}
   <h1>taxonomy</h1>
 {{ end }}
-// 此时便可访问 http://localhost:1313/categories 和 http://localhost:1313/tags 了
-
-
-
-// 在 md 文档的 front matter 中使用上述的分类
+```
+此时便可访问网址 http://localhost:1313/categories 和 http://localhost:1313/tags 了
+<br/>
+可以在 md 文档的 front matter 中使用上述的分类
+```go
 +++
 categories = ['vegetarian', 'gluten-free']
 title = 'Example'
 +++
-
-
-// 然后在 taxonomy.html 文件中
+```
+然后在 taxonomy.html 文件中创建分类的链接：
+```go
 {{ define "main" }}
   {{ range .Pages }}
     <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
   {{ end }}
 {{ end }}
-
-// 此时访问 http://localhost:1313/categories 便会出现 vegetarian 和 gluten-free 的链接
-// 需要创建 term.html 来渲染 vegetarian 和 gluten-free 链接的网站
-
-
-
-
-// 在 hugo.toml 中添加如下内容禁用 taxonomy 和 term 页面
+```
+此时访问 http://localhost:1313/categories 便会出现 vegetarian 和 gluten-free 的链接
+<br/>
+需要创建 term.html 来渲染 vegetarian 和 gluten-free 链接的网站
+<br/>
+也可以通过在 hugo.toml 中添加如下内容禁用 taxonomy 和 term 页面
+```go
 disableKinds = ['taxonomy', 'term']
 ```
 ## section.html
+一个 section 就是 content 目录的第一级目录或者任何包含 `_index.md` 文件的目录
 ```go
-一个 section 就是 content 目录的第一级目录或者任何包含 _index.md 文件的目录
-
 content/
 ├── articles/             <-- section (top-level directory)
 │       └── article/
@@ -173,62 +187,62 @@ content/
         │   ├── _index.md
         │   └── benefit.md
         └── _index.md
-
-articles/article 目录不是 section
-
-
-当访问 content/articiles 时会优先使用 layouts/articles/section.html 进行渲染，这就是 section.html 的作用
-如果不存在 layouts/articles/section.html，则会使用 layouts/section.html，如果没有 layouts/section.html 则会使用 layouts/list.html
 ```
+articles/article 目录不是 section
+<br/>
+当访问 content/articiles 时会优先使用 layouts/articles/section.html 进行渲染，这就是 section.html 的作用
+<br/>
+如果不存在 layouts/articles/section.html，则会使用 layouts/section.html，如果没有 layouts/section.html 则会使用 layouts/list.html
 ## `_index.md`作用
+`_index.md` 在 Hugo 中扮演着特殊角色。它允许你向 home、section、taxonomy、term 页面添加 front matter 和 content
+<br/>
+比如有该目录结构：
 ```go
-// _index.md 在 Hugo 中扮演着特殊角色。它允许你向 home、section、taxonomy、term 页面添加 front matter 和 content
-
-// 比如有该目录结构
 content/
 ├── articles/
 │       └── article/
 │           ├── cat.md
 │           └── _index.md
 └── _index.md
-
-// 则在 layouts/articles/section.html 中可以访问 content/articiles/_index.md 中的内容
+```
+则在 `layouts/articles/section.html` 中可以访问 `content/articiles/_index.md` 中的内容
+```go
 {{ define "main" }}
   {{ .Content }}
 {{ end }}
-
-// 在 layouts/home.html 中可以访问 content/_index.md 中的内容
 ```
+而在 `layouts/home.html` 中可以访问 `content/_index.md` 中的内容
 ## 内层的page.html
-```go
-// content/books/flower.md 优先使用 layouts/books/page.html 渲染，然后才是 layouts/page.html
-```
+`content/books/flower.md` 优先使用 `layouts/books/page.html` 渲染，然后才是 `layouts/page.html`
 ## `_partials`
+可以将一个较长的模板文件分成几个较小的模板文件
+<br/>
+通过 `layouts/_partials` 目录下的模板实现
+<br/>
+比如该 home.html：
 ```go
-// 可以将一个较长的模板文件分成几个较小的模板文件
-// 通过 layouts/_partials 目录下的模板实现
-
-// 比如 home.html
 {{ define "main" }}
   {{ partial "header.html" . }}
   <h1>Content</h1>
   {{ partial "footer.html" . }}
 {{ end }}
-// {{ partial "header.html" . }} 部分会被相应的 layouts/_partials/header.html 中的内容替换
 ```
+`{{ partial "header.html" . }}` 部分会被相应的 `layouts/_partials/header.html` 中的内容替换
 ## `_markup`
+`layouts/_markup` 目录下的文件是 render hook 模板
+<br/>
+功能是覆盖 Markdown 到 HTML 的转换
+<br/>
+比如将 md 文件中的标题转换为 html 的 `<h1><span>GOOD</span></h1>`，则创建该 render-heading.html 文件：
 ```go
-// layouts/_markup 目录下的文件是 render hook 模板
-// 功能是覆盖 Markdown 到 HTML 的转换
-// 比如将 md 文件中的标题转换为 html 的 <h1><span>GOOD</span></h1>，则创建 render-heading.html 文件：
 <h1>
   <span>GOOD</span>
 </h1>
-
-
-
-// 存在下面这些种类的 render hook 模板
-// 比如 render-heading.html 就是用于 <h1> 到 <h6> 的
+```
+存在下面这些种类的 render hook 模板
+<br/>
+比如 render-heading.html 就是用于 `<h1>` 到 `<h6>` 的
+```go
 layouts/
   └── _markup/
       ├── render-blockquote.html
@@ -238,8 +252,9 @@ layouts/
       ├── render-link.html
       ├── render-passthrough.html
       └── render-table.html
-
-// 可以为不同的页面类型创建 render hook 模板
+```
+可以为不同的页面类型创建 render hook 模板
+```go
 layouts/
 ├── books/
 │   └── _markup/
@@ -251,70 +266,64 @@ layouts/
         └── render-link.rss.xml
 ```
 ## `_shortcodes`
+`layouts/_shortcodes` 目录下的文件是 shortcode 模板
+<br/>
+其在 md 文件中被调用
+<br/>
+假如有 `_shortcodes/audio.html`：
 ```go
-// layouts/_shortcodes 目录下的文件是 shortcode 模板
-// 其内容在 md 文件中调用
-
-// 假如有 _shortcodes/audio.html：
 {{ with resources.Get (.Get "src") }}
   /* <audio controls preload="auto" src="{{ .RelPermalink }}"></audio> */
 {{ end }}
-
-// 则可以在 md 文件中调用：
+```
+则可以在 md 文件中调用：
+```go
 {{ /* < audio src=/audio/test.mp3 > */ }}
 ```
 ## 内容视图模板
+内容视图模板（content view template）和 partial 模板相似，不过其可以继承上下文
+<br/>
+假设 layouts/page.html：
 ```go
-// 内容视图模板（content view template）和 partial 模板相似，不过其可以继承上下文
-
-// 假设 layouts/page.html
 {{ define "main" }}
   {{ .Render "view_card" }}
 {{ end }}
-
-// 创建 layouts/view_card.html
+```
+创建 layouts/view_card.html：
+```go
 <div>
   {{ .Content }}
   <p>view_cadsadfrd</p>
 </div>
-
-// 也就是说内容视图模板可以使用点.访问上下文，而 partial 模板不行
 ```
+也就是说内容视图模板可以使用点.访问上下文，而 partial 模板不行
 ## 给md文件指定模板
+使用 front matter 中的 layout 指定模板
+<br/>
+假设有 content/posts/learn.md 文件：
 ```go
-// 使用 front matter 中的 layout 指定模板
-// 假设有 content/posts/learn.md 文件
 +++
 layout = 'ok'
 +++
 # learn
 learning
-// 则该 md 文件会使用 layouts/posts/ok.html 进行渲染
 ```
+则该 md 文件会使用 layouts/posts/ok.html 进行渲染
 ## 网站标签的小图标
-```go
 将 favicon.ico 放入 static 文件中便自动生效
-```
 ## 使用主题
+首先使用该命令添加主题
 ```go
-// 使用该命令添加主题
 git submodule add https://github.com/imfing/hextra themes/hextra
-
-
-
-// 在 hugo.toml 中添加
+```
+然后在 hugo.toml 中添加
+```go
 theme = 'hugo-book'
-
-
-
-// 因为 hugo 不原生支持 Tailwind css，css 的设置较为麻烦
-// 所以使用 hugo 创建网站一般使用其他人编写的主题
-// 模板应用顺序是 layouts 目录，其次才是主题的 layouts 目录，所以可以在 layouts 目录下编写模板覆盖主题的模板
-
-
-
-
-// 好用的主题
+```
+模板应用顺序是 layouts 目录，其次才是主题的 layouts 目录，所以可以在 layouts 目录下编写模板覆盖主题的模板
+<br/>
+一些推荐的主题
+```go
 // hextra 是现代化的网页主题，包含博客和文档以及其他页面，推荐使用
 // hugo-PaperMod， hugo-theme-stack 是博客网站，专门用于博客
 // hugo-book 是文档网站，专门用于文档
@@ -328,6 +337,7 @@ https://github.com/imfing/hextra
 [[使用hugo-theme-stack主题]]
 [[使用hextra主题]]
 ## 设置网站为中文网站
+在 hugo.toml 中设置
 ```toml
 defaultContentLanguage = 'zh'
 languageCode = 'zh-cn'
